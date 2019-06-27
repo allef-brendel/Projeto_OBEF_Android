@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">OBEF</string>
+    <string name="cadastrese">Cadastre-se</string>
+    <string name="bt_login">Login</string>
+    <string name="botao_cadastrar">Cadastrar</string>
+    <string name="item_sair">Deslogar</string>
+    <string name="title_activity_acertou">Acertou</string>
+
+    <string-array name="combobox">
+        <item>Escolha sua série escolar</item>
+        <item>2ª ou 3ª Ano do ensino fundamental</item>
+        <item>4ª ou 5ª Ano do ensino fundamental</item>
+        <item>6ª ou 7ª Ano do ensino fundamental</item>
+        <item>8ª ou 9ª Ano do ensino fundamental</item>
+        <item>1ª, 2ª ou 3ª Ano do ensino médio</item>
+    </string-array>
+
+</resources>

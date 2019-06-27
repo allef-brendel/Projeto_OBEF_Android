@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/telamoedas11">
+
+    <ImageView
+        android:id="@+id/quantQuestoesAcertadas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="140dp"
+        android:layout_marginLeft="140dp"
+        android:layout_marginTop="88dp"
+        android:layout_marginEnd="140dp"
+        android:layout_marginRight="140dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/zerodez" />
+
+    <ImageView
+        android:id="@+id/botaomoeda1"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/moeda1"
+        app:layout_constraintEnd_toStartOf="@+id/botaomoeda2"
+        app:layout_constraintHorizontal_bias="0.391"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/quantQuestoesAcertadas" />
+
+    <ImageView
+        android:id="@+id/botaomoeda2"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/moeda2"
+        app:layout_constraintEnd_toStartOf="@+id/botaomoeda3"
+        app:layout_constraintTop_toBottomOf="@+id/quantQuestoesAcertadas" />
+
+    <ImageView
+        android:id="@+id/botaomoeda3"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="220dp"
+        android:layout_marginLeft="220dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginRight="30dp"
+        android:background="@drawable/moeda3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.7"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/quantQuestoesAcertadas" />
+
+    <ImageView
+        android:id="@+id/botaomoeda4"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginRight="30dp"
+        android:background="@drawable/moeda4"
+        app:layout_constraintEnd_toStartOf="@+id/botaomoeda5"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/botaomoeda1"
+        app:layout_constraintTop_toBottomOf="@+id/botaomoeda2" />
+
+    <ImageView
+        android:id="@+id/botaomoeda5"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="188dp"
+        android:layout_marginLeft="188dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@drawable/moeda5"
+        app:layout_constraintEnd_toEndOf="@+id/botaomoeda3"
+        app:layout_constraintHorizontal_bias="0.366"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/botaomoeda2" />
+
+    <ImageView
+        android:id="@+id/botaomoeda6"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/moeda6"
+        app:layout_constraintBottom_toTopOf="@+id/botaomoeda9"
+        app:layout_constraintEnd_toStartOf="@+id/botaomoeda7"
+        app:layout_constraintTop_toBottomOf="@+id/botaomoeda4"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:id="@+id/botaomoeda7"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/moeda7"
+        app:layout_constraintEnd_toStartOf="@+id/botaomoeda8"
+        app:layout_constraintHorizontal_bias="0.689"
+        app:layout_constraintStart_toStartOf="@+id/botaomoeda4"
+        app:layout_constraintTop_toBottomOf="@+id/botaomoeda5" />
+
+    <ImageView
+        android:id="@+id/botaomoeda8"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginLeft="36dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/moeda8"
+        app:layout_constraintStart_toStartOf="@+id/botaomoeda5"
+        app:layout_constraintTop_toBottomOf="@+id/botaomoeda5" />
+
+    <ImageView
+        android:id="@+id/botaomoeda9"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/moeda9"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/botaomoeda10"
+        app:layout_constraintHorizontal_bias="0.705"
+        app:layout_constraintStart_toStartOf="@+id/botaomoeda6"
+        app:layout_constraintTop_toBottomOf="@+id/botaomoeda7"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:id="@+id/botaomoeda10"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="170dp"
+        android:layout_marginLeft="170dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/moeda10"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/botaomoeda8"
+        app:layout_constraintHorizontal_bias="0.555"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/botaomoeda7"
+        app:layout_constraintVertical_bias="0.0" />
+
+</android.support.constraint.ConstraintLayout>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/telalogin11">
+
+    <Button
+        android:id="@+id/botaoLogin"
+        android:layout_width="match_parent"
+        android:layout_height="63dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginEnd="100dp"
+        android:layout_marginRight="100dp"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/botaologin"
+        android:gravity="center|center_horizontal|center_vertical"
+        app:layout_constraintBottom_toTopOf="@+id/botaoCadastrese"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/botaoCadastrese"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_marginStart="120dp"
+        android:layout_marginLeft="120dp"
+        android:layout_marginEnd="120dp"
+        android:layout_marginRight="120dp"
+        android:layout_marginBottom="68dp"
+        android:background="@drawable/cadastrese1"
+        android:gravity="center|center_horizontal|center_vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/editText_login_senha"
+        android:layout_width="match_parent"
+        android:layout_height="51dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginBottom="52dp"
+        android:background="@drawable/espacoembranco"
+        android:ems="10"
+        android:gravity="center|center_horizontal|center_vertical"
+        android:hint="Digite sua senha"
+        android:inputType="textPassword"
+        android:paddingLeft="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/botaoLogin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/editeText_login_email"
+        android:layout_width="match_parent"
+        android:layout_height="51dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/espacoembranco"
+        android:ems="10"
+        android:gravity="center|center_horizontal|center_vertical"
+        android:hint="Digite seu e-mail"
+        android:inputType="textEmailAddress"
+        android:paddingLeft="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/editText_login_senha"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</android.support.constraint.ConstraintLayout>

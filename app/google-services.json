@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "317878652333",
+    "firebase_url": "https://simulaobef-33e6a.firebaseio.com",
+    "project_id": "simulaobef-33e6a",
+    "storage_bucket": "simulaobef-33e6a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:317878652333:android:8ed55f3ab98d0563",
+        "android_client_info": {
+          "package_name": "com.example.obef"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "317878652333-mbc34scln1a7c9g5g7kh17pnffc542co.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.obef",
+            "certificate_hash": "d2a462c6d8e55003e1b257e1184161be14168050"
+          }
+        },
+        {
+          "client_id": "317878652333-bu5fqritr83ig8042uie72rbh2a77rfi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBd76iReFuauznT6kYpj9ALLugsUcAiGm4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "317878652333-bu5fqritr83ig8042uie72rbh2a77rfi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

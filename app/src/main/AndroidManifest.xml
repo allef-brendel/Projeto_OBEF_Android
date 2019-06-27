@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.obef">
+
+    <supports-screens
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:smallScreens="true"
+        android:xlargeScreens="true" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/iconeoficial"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/iconeoficial"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".AcertouErrou.Errou"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".AcertouErrou.Acertou"
+            android:label="@string/title_activity_acertou"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Activity.RecuperarQuestao"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".Activity.ActivityLogin"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Cadastro.CadastroActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.DesafioDoDia.Desafio10"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.DesafioDoDia.Desafio9"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.DesafioDoDia.Desafio8"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.DesafioDoDia.Desafio7"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.DesafioDoDia.Desafio6"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.DesafioDoDia.Desafio5"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.DesafioDoDia.Desafio4"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.DesafioDoDia.Desafio3"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.DesafioDoDia.Desafio2"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.DesafioDoDia.Desafio1"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.MenuInformacao"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Splash.Splash2"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.Menu"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.MenuCadastro"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.MenuPontos"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.MenuQuestoes"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Splash.Splash1"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
