@@ -1,11 +1,13 @@
 package com.example.obef.Activity;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -49,21 +51,13 @@ public class ActivityLogin extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         gravador=new Gravador();
-
         super.onCreate(savedInstanceState);
+        setarContet();
+        validarUsuario();
 
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        int height = displayMetrics.heightPixels;
-        int width = displayMetrics.widthPixels;
+    }
 
-        if(width==1080 && height==1920){
-            setContentView(R.layout.layout_1920_login);
-        }else{
-            setContentView(R.layout.activity_tela_login);
-        }
-
-
+    private void validarUsuario() {
         if(!validouUserOffline()){
             System.out.println("asdasdasdasdasdasdasdasdasd");
             cadastrar();
@@ -72,9 +66,20 @@ public class ActivityLogin extends AppCompatActivity {
             abriTelaPrincipal();
             finish();
         }
-
-
     }
+
+    private void setarContet() {
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int height = displayMetrics.heightPixels;
+        int width = displayMetrics.widthPixels;
+        if(width==1080 && height==1920){
+            setContentView(R.layout.layout_1920_login);
+        }else{
+            setContentView(R.layout.activity_tela_login);
+        }
+    }
+
     private void cadastrar(){
 
         email = findViewById(R.id.editeText_login_email);
@@ -119,62 +124,10 @@ public class ActivityLogin extends AppCompatActivity {
                 public void onComplete(@NonNull Task<AuthResult> task) {
 
                     if (task.isSuccessful()) {
-                        DatabaseReference firebase = FirebaseDatabase.getInstance().getReference();
-                        firebase.addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                if(aluno.getEmail().equals(gravador.lerUser())){
-                                    abriTelaPrincipal();
-                                }
-                                else{
-                                    Preferencias preferencias = new Preferencias(ActivityLogin.this);
-                                    String identificadorUsuarioLogado = Base64Custom.codificarBase64(aluno.getEmail());
-                                    preferencias.salvarDados(identificadorUsuarioLogado);
-                                    gravador.salvarUser(aluno.getEmail());
-                                    System.out.println("Salvou o usuário");
-                                    gravador.resetarAtualizacaoPontos();
-                                    gravador.resetarPontosTotais();
-                                    gravador.resetarPontos();
-                                    gravador.resetarMoedas();
-                                    gravador.resetarQuantAcertos();
-                                    gravador.resetarAtualizacaoPontos();
-                                    gravador.recuperarMoedas();
-                                    int pontosTotais = dataSnapshot.child("Acertos").child(identificadorUsuarioLogado).child("pontos").getValue(Integer.class);
-                                    gravador.salvarPontosGanhosTotal(pontosTotais);
-                                    String datalidas = dataSnapshot.child("Acertos").child(identificadorUsuarioLogado).child("ultimoDiaLogado").getValue(String.class);
-                                    gravador.salvarData(datalidas);
-                                    if (gravador.lerData().equals("0")) {
-
-                                    } else if (gravador.compararData(gravador.lerData())) {
-                                        gravador.bloquearDesafio();
-                                    }
-                                    abriTelaPrincipal();
-
-                                    Toast.makeText(ActivityLogin.this, "Sucesso ao logar", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                            }
-                        });
+                        loginValidado();
 
                     } else {
-                        String erroExecao = "";
-
-                        try {
-                            throw task.getException();
-                        } catch (FirebaseAuthInvalidUserException e) {
-                            erroExecao = "E-mail não cadastrado";
-                        } catch (FirebaseAuthInvalidCredentialsException e) {
-                            erroExecao = "E-mail ou senha invalidos";
-                        } catch (Exception e) {
-                            erroExecao = "Erro ao efetuar o login";
-                            e.printStackTrace();
-                        }
-                        Toast.makeText(ActivityLogin.this, erroExecao, Toast.LENGTH_SHORT).show();
-                        botaoLogar.setVisibility(View.VISIBLE);
+                        loginNaoValidado(task);
                     }
                 }
             });
@@ -213,5 +166,73 @@ public class ActivityLogin extends AppCompatActivity {
     private void botoesInvisiveis(){
         botaoLogar.setVisibility(View.INVISIBLE);
         botaoCadastrese.setVisibility(View.INVISIBLE);
+    }
+    private void loginValidado(){
+        DatabaseReference firebase = FirebaseDatabase.getInstance().getReference();
+        firebase.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(aluno.getEmail().equals(gravador.lerUser())){
+                    abriTelaPrincipal();
+                }
+                else{
+                    setArquivosAoLogar(dataSnapshot);
+                    bloqueioDesafioSeSegundoLogin();
+                    abriTelaPrincipal();
+
+                    Toast.makeText(ActivityLogin.this, "Sucesso ao logar", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void setArquivosAoLogar(DataSnapshot dataSnapshot) {
+        Preferencias preferencias = new Preferencias(ActivityLogin.this);
+        String identificadorUsuarioLogado = Base64Custom.codificarBase64(aluno.getEmail());
+        preferencias.salvarDados(identificadorUsuarioLogado);
+        gravador.salvarUser(aluno.getEmail());
+        System.out.println("Salvou o usuário");
+        gravador.resetarAtualizacaoPontos();
+        gravador.resetarPontosTotais();
+        gravador.resetarPontos();
+        gravador.resetarMoedas();
+        gravador.resetarQuantAcertos();
+        gravador.resetarAtualizacaoPontos();
+        gravador.recuperarMoedas();
+        int pontosTotais = dataSnapshot.child("Acertos").child(identificadorUsuarioLogado).child("pontos").getValue(Integer.class);
+        gravador.salvarPontosGanhosTotal(pontosTotais);
+        String datalidas = dataSnapshot.child("Acertos").child(identificadorUsuarioLogado).child("ultimoDiaLogado").getValue(String.class);
+        gravador.salvarData(datalidas);
+
+    }
+
+    private void loginNaoValidado(@NonNull Task<AuthResult> task){
+        String erroExecao = "";
+
+        try {
+            throw task.getException();
+        } catch (FirebaseAuthInvalidUserException e) {
+            erroExecao = "E-mail não cadastrado";
+        } catch (FirebaseAuthInvalidCredentialsException e) {
+            erroExecao = "E-mail ou senha invalidos";
+        } catch (Exception e) {
+            erroExecao = "Erro ao efetuar o login";
+            e.printStackTrace();
+        }
+        Toast.makeText(ActivityLogin.this, erroExecao, Toast.LENGTH_SHORT).show();
+        botaoLogar.setVisibility(View.VISIBLE);
+
+    }
+    private void bloqueioDesafioSeSegundoLogin(){
+        if (gravador.lerData().equals("0")) {
+
+        } else if (gravador.compararData(gravador.lerData())) {
+            gravador.bloquearDesafio();
+        }
     }
 }

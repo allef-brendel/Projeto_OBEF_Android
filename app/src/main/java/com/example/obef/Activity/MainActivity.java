@@ -1,5 +1,6 @@
 package com.example.obef.Activity;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -8,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -51,15 +53,10 @@ public class MainActivity extends AppCompatActivity {
     private RadioButton radioButton5;
     private RadioButton radioButtonEscolhido;
     private RadioGroup radioGroup;
-    private List<String> idQuestoes;
-    private List<String> questoesBD;
-    private String questao = "-LbHIqN9xlO1IauQJ3hn";
     private Random rd;
-    private int pontos;
-    private boolean iniciado;
-    int numQuestao;
-    private Escola escola;
     private int id;
+    private Dialog MyDialog;
+
     @Override
     public void onBackPressed(){
         startActivity(new Intent(MainActivity.this,Menu.class));
@@ -69,42 +66,56 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        int height = displayMetrics.heightPixels;
-        int width = displayMetrics.widthPixels;
-
-        if(width==1080 && height==1920){
-            setContentView(R.layout.layout_1920_jogar);
-        }else{
-            setContentView(R.layout.activity_tela_jogar);
-        }
-
-
+        setarContent();
         rd = new Random();
-        idQuestoes = new ArrayList<String>();
-        questoesBD = new ArrayList<String>();
-        //id=rd.nextInt(59)+1;
+        setarIdComponentes();
+        firebaseDatabase = FirebaseDatabase.getInstance().getReference();
 
+        setClickButtonDica();
+        setClickButtonEscolher();
+        setarStringsDaQuestao();
+    }
+
+    private void setarIdComponentes() {
         radioButton1 = findViewById(R.id.rd1Id);
         radioButton2 = findViewById(R.id.rd2Id);
         radioButton3 = findViewById(R.id.rd3Id);
         radioButton4 = findViewById(R.id.rd4Id);
         radioButton5 = findViewById(R.id.rd5Id);
-
-
         radioButtonEscolhido = findViewById(R.id.rd1Id);
-
         radioGroup = findViewById(R.id.radioGroup);
-
         buttonEscolher = findViewById(R.id.escolherId);
         buttonDica = findViewById(R.id.dicaId);
-
         testviwe = findViewById(R.id.textoID);
+    }
 
-        firebaseDatabase = FirebaseDatabase.getInstance().getReference();
+    private void setarStringsDaQuestao() {
+        firebaseDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
 
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                id=rd.nextInt(dataSnapshot.child("quantQuestoes").getValue(Integer.class))+1;
+                String string = (String) dataSnapshot.child("Questoes").child(""+id).child("enunciado").getValue();
+                testviwe.setText(string);
+                String alternativa1 = (String) dataSnapshot.child("Questoes").child(""+id).child("alternativa1").child("texto").getValue();
+                radioButton1.setText(alternativa1);
+                String alternativa2 = (String) dataSnapshot.child("Questoes").child(""+id).child("alternativa2").child("texto").getValue();
+                radioButton2.setText(alternativa2);
+                String alternativa3 = (String) dataSnapshot.child("Questoes").child(""+id).child("alternativa3").child("texto").getValue();
+                radioButton3.setText(alternativa3);
+                String alternativa4 = (String) dataSnapshot.child("Questoes").child(""+id).child("alternativa4").child("texto").getValue();
+                radioButton4.setText(alternativa4);
+                String alternativa5 = (String) dataSnapshot.child("Questoes").child(""+id).child("alternativa5").child("texto").getValue();
+                radioButton5.setText(alternativa5);
+            }
 
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+    }
+
+    private void setClickButtonDica() {
         buttonDica.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -127,7 +138,9 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
         });
+    }
 
+    private void setClickButtonEscolher() {
         buttonEscolher.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -158,32 +171,21 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
         });
+    }
 
+    private void setarContent() {
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int height = displayMetrics.heightPixels;
+        int width = displayMetrics.widthPixels;
 
-        firebaseDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
-
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                id=rd.nextInt(dataSnapshot.child("quantQuestoes").getValue(Integer.class))+1;
-                String string = (String) dataSnapshot.child("Questoes").child(""+id).child("enunciado").getValue();
-                testviwe.setText(string);
-                String alternativa1 = (String) dataSnapshot.child("Questoes").child(""+id).child("alternativa1").child("texto").getValue();
-                radioButton1.setText(alternativa1);
-                String alternativa2 = (String) dataSnapshot.child("Questoes").child(""+id).child("alternativa2").child("texto").getValue();
-                radioButton2.setText(alternativa2);
-                String alternativa3 = (String) dataSnapshot.child("Questoes").child(""+id).child("alternativa3").child("texto").getValue();
-                radioButton3.setText(alternativa3);
-                String alternativa4 = (String) dataSnapshot.child("Questoes").child(""+id).child("alternativa4").child("texto").getValue();
-                radioButton4.setText(alternativa4);
-                String alternativa5 = (String) dataSnapshot.child("Questoes").child(""+id).child("alternativa5").child("texto").getValue();
-                radioButton5.setText(alternativa5);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
+        if(width==1080 && height==1920){
+            setContentView(R.layout.layout_1920_jogar);
+        }else{
+            setContentView(R.layout.activity_tela_jogar);
         }
+    }
+
     private void gameOver() {
 
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MainActivity.this);
@@ -217,8 +219,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-
-                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MainActivity.this);
+               AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MainActivity.this);
                 alertDialogBuilder.setMessage("Resposta Correta!" );
                 alertDialogBuilder.setCancelable(false);
                 alertDialogBuilder.setPositiveButton("Nova Questão",
@@ -240,6 +241,7 @@ public class MainActivity extends AppCompatActivity {
                         });
                 AlertDialog alertDialog = alertDialogBuilder.create();
                 alertDialog.show();
+
             }
 
             @Override
@@ -251,67 +253,8 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(MainActivity.this,MainActivity.class));
         finish();
     }
-    private void getPontuacao(){
-        if(iniciado) {
-            System.out.println("Pontuacao iniciado");
-            firebaseDatabase.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
 
-                    String asd = dataSnapshot.child("Respostas").child(""+id).child("pontosTotal").getValue().toString();
-                    pontos = Integer.parseInt(asd);
-                    System.out.print("O jogador possui " + pontos);
+    public void MyCustomAlertDialog(){
 
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-                    System.out.println("Cancelado");
-                }
-            });
-        }
     }
-    public void gravarArquivo(String nomeArquivo, String texto){
-        try {
-            OutputStreamWriter buff=new OutputStreamWriter(new FileOutputStream("/data/data/com.example.obef/files/Questao1.txt"),"UTF-8");
-            buff.write(texto);
-            buff.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("1");
-            e.printStackTrace();
-        } catch (UnsupportedEncodingException e) {
-            System.out.println("2");
-            e.printStackTrace();
-        } catch (IOException e) {
-            System.out.println("3");
-            e.printStackTrace();
-        }
-    }
-    public String lerArquivo(String nomeArquivo){
-        String s="";
-        BufferedReader buff;
-        try {
-            buff= new BufferedReader(new InputStreamReader(new FileInputStream("/data/data/com.example.obef/files/Questao1.txt"),"UTF-8"));
-            String linha=buff.readLine();
-            while(linha!=null){
-                s+=linha+"\n";
-                linha=buff.readLine();
-            }
-            buff.close();
-        } catch (UnsupportedEncodingException e) {
-            System.out.println("4");
-            e.printStackTrace();
-        } catch (FileNotFoundException e) {
-            System.out.println("5");
-            e.printStackTrace();
-        } catch (IOException e) {
-            System.out.println("6");
-            e.printStackTrace();
-        }
-        return s;
-    }
-
-
-
-
 }

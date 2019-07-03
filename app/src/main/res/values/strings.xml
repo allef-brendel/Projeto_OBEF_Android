@@ -5,6 +5,8 @@
     <string name="botao_cadastrar">Cadastrar</string>
     <string name="item_sair">Deslogar</string>
     <string name="title_activity_acertou">Acertou</string>
+    <string name="menu_de_quest">Menu de Questões</string>
+    <string name="justificativa">Justificativa</string>
 
     <string-array name="combobox">
         <item>Escolha sua série escolar</item>

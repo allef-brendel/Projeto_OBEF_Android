@@ -1,13 +1,14 @@
 package com.example.obef.Activity.DesafioDoDia;
 
-import android.content.DialogInterface;
+import android.app.Dialog;
 import android.content.Intent;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -15,8 +16,6 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.obef.AcertouErrou.Acertou;
-import com.example.obef.AcertouErrou.Errou;
 import com.example.obef.Activity.MenuQuestoes;
 import com.example.obef.Configuracao.ConfiguracaoFirebase;
 import com.example.obef.Gerenciamento.Gravador;
@@ -49,6 +48,8 @@ public abstract class Desafio extends AppCompatActivity {
     int pontosGanhos;
     Questao questao;
     private FirebaseAuth auth;
+    private Dialog MyDialog;
+
     @Override
     public void onBackPressed(){
         startActivity(new Intent(desafio, MenuQuestoes.class));
@@ -65,49 +66,32 @@ public abstract class Desafio extends AppCompatActivity {
         Gravador.listaMoedas.set(gerarID()-1,"2");
         gravador.salvarMoedas();
         gravador.salvarQuantQuestoesAcertadas();
-
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        int height = displayMetrics.heightPixels;
-        int width = displayMetrics.widthPixels;
-
-        /*if(width==1080 && height==1920){
-            setContentView(R.layout.layout_1920_desafiododia);
-        }else{
-            setContentView(R.layout.activity_tela_desafiododia);
-        }*/
-        setContentView(R.layout.activity_tela_desafiododia);
-
-        radioButton1 = findViewById(R.id.rd1Id);
-        radioButton2 = findViewById(R.id.rd2Id);
-        radioButton3 = findViewById(R.id.rd3Id);
-        radioButton4 = findViewById(R.id.rd4Id);
-        radioButton5 = findViewById(R.id.rd5Id);
-
-        radioButtonEscolhido = findViewById(R.id.rd1Id);
-        radioGroup = findViewById(R.id.radioGroup);
-        buttonEscolher = findViewById(R.id.escolherId);
-        buttonDica = findViewById(R.id.dicaId);
-        testviwe =  findViewById(R.id.textoID);
-
+        setarContent();
+        setarComponentes();
         desafio=this;
         auth= ConfiguracaoFirebase.getFireBaseAutenticacao();
         firebaseDatabase = FirebaseDatabase.getInstance().getReference().child("Acertos").child(Base64Custom.codificarBase64(auth.getCurrentUser().getEmail()));
+        setClickButtonDica();
+        setClickButtonEscolher();
+        setarTextoNoLayoutDaQuestao();
+    }
 
+    private void setarTextoNoLayoutDaQuestao() {
+        String string = questao.getEnunciado();
+        testviwe.setText(string);
+        String alternativa1 = questao.getAlternativa1().getTexto();
+        radioButton1.setText(alternativa1);
+        String alternativa2 = questao.getAlternativa2().getTexto();
+        radioButton2.setText(alternativa2);
+        String alternativa3 = questao.getAlternativa3().getTexto();
+        radioButton3.setText(alternativa3);
+        String alternativa4 = questao.getAlternativa4().getTexto();
+        radioButton4.setText(alternativa4);
+        String alternativa5 = questao.getAlternativa5().getTexto();
+        radioButton5.setText(alternativa5);
+    }
 
-        buttonDica.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                        dicaUsada();
-                        String string2 = questao.getDica();
-                        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(desafio);
-                        alertDialogBuilder.setMessage(string2);
-                        AlertDialog alertDialog = alertDialogBuilder.create();
-                        alertDialog.show();
-
-            }
-        });
-
+    private void setClickButtonEscolher() {
         buttonEscolher.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -130,22 +114,48 @@ public abstract class Desafio extends AppCompatActivity {
 
             }
         });
+    }
 
-                String string = questao.getEnunciado();
-                testviwe.setText(string);
-                String alternativa1 = questao.getAlternativa1().getTexto();
-                radioButton1.setText(alternativa1);
-                String alternativa2 = questao.getAlternativa2().getTexto();
-                radioButton2.setText(alternativa2);
-                String alternativa3 = questao.getAlternativa3().getTexto();
-                radioButton3.setText(alternativa3);
-                String alternativa4 = questao.getAlternativa4().getTexto();
-                radioButton4.setText(alternativa4);
-                String alternativa5 = questao.getAlternativa5().getTexto();
-                radioButton5.setText(alternativa5);
+    private void setClickButtonDica() {
+        buttonDica.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                        dicaUsada();
+                        String string2 = questao.getDica();
+                        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(desafio);
+                        alertDialogBuilder.setMessage(string2);
+                        AlertDialog alertDialog = alertDialogBuilder.create();
+                        alertDialog.show();
 
+            }
+        });
+    }
 
+    private void setarComponentes() {
+        radioButton1 = findViewById(R.id.rd1Id);
+        radioButton2 = findViewById(R.id.rd2Id);
+        radioButton3 = findViewById(R.id.rd3Id);
+        radioButton4 = findViewById(R.id.rd4Id);
+        radioButton5 = findViewById(R.id.rd5Id);
 
+        radioButtonEscolhido = findViewById(R.id.rd1Id);
+        radioGroup = findViewById(R.id.radioGroup);
+        buttonEscolher = findViewById(R.id.escolherId);
+        buttonDica = findViewById(R.id.dicaId);
+        testviwe =  findViewById(R.id.textoID);
+    }
+
+    private void setarContent() {
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int height = displayMetrics.heightPixels;
+        int width = displayMetrics.widthPixels;
+
+        if(width==1080 && height==1920){
+            setContentView(R.layout.layout_1920_desafiododia);
+        }else{
+            setContentView(R.layout.activity_tela_desafiododia);
+        }
     }
 
     private void statusGameOver(int alternativa){
@@ -170,57 +180,64 @@ public abstract class Desafio extends AppCompatActivity {
     }
 
     private void gameOver() {
-       /* LayoutInflater layoutInflater =  LayoutInflater.from(desafio);
-        final View cachorro = layoutInflater.inflate(R.layout.activity_porcotriste,null);
+        MyDialog = new Dialog(Desafio.this);
+        MyDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        MyDialog.setContentView(R.layout.alert_dialog_modificado);
+        MyDialog.setCancelable(false);
+        MyDialog.setTitle("Resposta Errada");
 
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(desafio);
-        alertDialogBuilder.setCancelable(false);
-        alertDialogBuilder.setPositiveButton("Menu Questões",
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        startActivity(new Intent(desafio, MenuQuestoes.class));
-                        finish();
-                    }
-                });
-        alertDialogBuilder.setNegativeButton("Justificativa",
-                new DialogInterface.OnClickListener() {
+        Button hello = MyDialog.findViewById(R.id.hello);
+        TextView text = MyDialog.findViewById(R.id.textViewDialog);
+        TextView textMeio = MyDialog.findViewById(R.id.textMeio);
+        ImageView image = MyDialog.findViewById(R.id.imageViewDialog);
+
+        textMeio.setText("Justificativa");
+        text.setText(gravador.recuperaStatusErrou());
+        image.setImageDrawable(ContextCompat.getDrawable(this,R.drawable.porcotriste));
+
+        hello.setEnabled(true);
+
+        hello.setOnClickListener(new View.OnClickListener() {
             @Override
-                public void onClick(DialogInterface dialog, int which) {
-                     startActivity(new Intent(desafio,Errou.class));
+            public void onClick(View v) {
+                startActivity(new Intent(Desafio.this, MenuQuestoes.class));
+                finish();
             }
         });
-        AlertDialog alertDialog = alertDialogBuilder.create();
-        alertDialog.setView(cachorro);
-        alertDialog.show();*/
-       startActivity(new Intent(desafio,Errou.class));
-       finish();
+
+        MyDialog.show();
     }
 
     private void respostaCerta() {
         gravador.salvarPontosGanhos(pontosGanhos);
         gravador.salvarPontosGanhosTotal(pontosGanhos);
 
-               /* LayoutInflater layoutInflater =  LayoutInflater.from(desafio);
-                final View cachorro = layoutInflater.inflate(R.layout.activity_porcofeliz,null);
+        MyDialog = new Dialog(Desafio.this);
+        MyDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        MyDialog.setContentView(R.layout.alert_dialog_modificado);
+        MyDialog.setCancelable(false);
+        MyDialog.setTitle("Resposta Certa");
 
-                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(desafio);
-                alertDialogBuilder.setCancelable(false);
-                alertDialogBuilder.setPositiveButton("Menu Questões",
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                startActivity(new Intent(desafio, MenuQuestoes.class));
-                                finish();
-                            }
-                        });
+        Button hello = MyDialog.findViewById(R.id.hello);
+        TextView text = MyDialog.findViewById(R.id.textViewDialog);
+        TextView textMeio = MyDialog.findViewById(R.id.textMeio);
+        ImageView image = MyDialog.findViewById(R.id.imageViewDialog);
 
-                AlertDialog alertDialog = alertDialogBuilder.create();
-                alertDialog.setView(cachorro);
-                alertDialog.show();*/
-        startActivity(new Intent(desafio,Acertou.class));
-        finish();
+        textMeio.setText("Pontos");
+        text.setText(gravador.recuperaStatusAcertou());
+        image.setImageDrawable(ContextCompat.getDrawable(this,R.drawable.porcofeliz));
 
+        hello.setEnabled(true);
+
+        hello.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Desafio.this, MenuQuestoes.class));
+                finish();
+            }
+        });
+
+        MyDialog.show();
 
     }
     public void dicaUsada(){
