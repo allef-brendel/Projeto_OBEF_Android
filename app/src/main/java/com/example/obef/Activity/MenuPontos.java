@@ -2,17 +2,18 @@ package com.example.obef.Activity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.service.notification.NotificationListenerService;
 import android.support.annotation.NonNull;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.obef.AbasAdapter;
 import com.example.obef.Gerenciamento.Gravador;
 import com.example.obef.R;
 import com.google.firebase.database.DataSnapshot;
@@ -38,6 +39,9 @@ public class MenuPontos extends AppCompatActivity {
     DatabaseReference firebase;
     private ProgressDialog pdia;
 
+    private TabLayout mTabLayout;
+    private ViewPager mViewPager;
+
     @Override
     public void onBackPressed(){
         startActivity(new Intent(this,Menu.class));
@@ -51,16 +55,8 @@ public class MenuPontos extends AppCompatActivity {
 
         gravador=new Gravador();
         super.onCreate(savedInstanceState);
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        int height = displayMetrics.heightPixels;
-        int width = displayMetrics.widthPixels;
 
-        if(width==1080 && height==1920){
-            setContentView(R.layout.layout_1920_pontos);
-        }else{
-            setContentView(R.layout.activity_tela_pontos);
-        }
+        setContentView(R.layout.activity_pontos);
 
         firebase= FirebaseDatabase.getInstance().getReference();
 
@@ -97,14 +93,13 @@ public class MenuPontos extends AppCompatActivity {
                                 cont++;
 
                             }
-                            System.out.println("pontos: "+pontos.get(x)+"\nNome: "+nomeAluno+"\nEscola: "+nomeEscola);
                         }
 
                         ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_list_item_1, android.R.id.text1, itens2);
-                        listView2.setAdapter(adapter2);
+                        //listView2.setAdapter(adapter2);
 
                         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_list_item_1, android.R.id.text1, itens);
-                        listView.setAdapter(adapter);
+                       // listView.setAdapter(adapter);
 
                         pdia.cancel();
 
@@ -115,7 +110,6 @@ public class MenuPontos extends AppCompatActivity {
 
                     }
                 });
-
             }
 
             @Override
@@ -128,11 +122,12 @@ public class MenuPontos extends AppCompatActivity {
         listView = findViewById(R.id.listViewPontosTotais);
         listView2 = findViewById(R.id.listViewPontos);
 
+        mTabLayout = findViewById(R.id.abas);
+        mViewPager = findViewById(R.id.abas_view_pager);
 
-        viewPontos.setText(""+gravador.lerPontos());
-        viewPontosTotais.setText(""+gravador.lerPontosTotais());
-
+        mViewPager.setAdapter(new AbasAdapter(getSupportFragmentManager(),getResources().getStringArray(R.array.tabs)));
+        mTabLayout.setupWithViewPager(mViewPager);
 
     }
-
 }
+

@@ -7,6 +7,7 @@
     <string name="title_activity_acertou">Acertou</string>
     <string name="menu_de_quest">Menu de Questões</string>
     <string name="justificativa">Justificativa</string>
+    <string name="horario">Obs: O ranking é atualizado todo os dias as 00:00hrs horário de Brasilia.</string>
 
     <string-array name="combobox">
         <item>Escolha sua série escolar</item>
@@ -15,6 +16,11 @@
         <item>6ª ou 7ª Ano do ensino fundamental</item>
         <item>8ª ou 9ª Ano do ensino fundamental</item>
         <item>1ª, 2ª ou 3ª Ano do ensino médio</item>
+    </string-array>
+
+    <string-array name="tabs">
+        <item>Ranking</item>
+        <item>Pontos</item>
     </string-array>
 
 </resources>
