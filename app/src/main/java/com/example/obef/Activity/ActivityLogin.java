@@ -171,6 +171,10 @@ public class ActivityLogin extends AppCompatActivity {
         botaoCadastrese.setVisibility(View.INVISIBLE);
     }
     private void loginValidado(){
+        pdia = new ProgressDialog(ActivityLogin.this);
+        pdia.setMessage("Carregando...");
+        pdia.show();
+
         DatabaseReference firebase = FirebaseDatabase.getInstance().getReference();
         firebase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

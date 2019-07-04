@@ -197,6 +197,8 @@ public abstract class Desafio extends AppCompatActivity {
 
         hello.setEnabled(true);
 
+        hello.setText("                Menu de Questões             ");
+
         hello.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -228,6 +230,8 @@ public abstract class Desafio extends AppCompatActivity {
         image.setImageDrawable(ContextCompat.getDrawable(this,R.drawable.porcofeliz));
 
         hello.setEnabled(true);
+
+        hello.setText("                     Menu de Questões                  ");
 
         hello.setOnClickListener(new View.OnClickListener() {
             @Override

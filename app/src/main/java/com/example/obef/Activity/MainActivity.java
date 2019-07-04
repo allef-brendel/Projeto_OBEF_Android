@@ -198,30 +198,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void gameOver() {
 
-        /*AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MainActivity.this);
-        alertDialogBuilder.setMessage("Resposta Incorreta!");
-        alertDialogBuilder.setCancelable(false);
-        alertDialogBuilder.setPositiveButton("Nova Questão",
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        finish();
-
-                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                    }
-                });
-        alertDialogBuilder.setNegativeButton("Voltar ao Menu",
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        startActivity(new Intent(MainActivity.this,Menu.class));
-                        finish();
-                    }
-
-                });
-        AlertDialog alertDialog = alertDialogBuilder.create();
-        alertDialog.show();*/
-
         MyDialog = new Dialog(MainActivity.this);
         MyDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         MyDialog.setContentView(R.layout.alert_dialog_modificado);
@@ -231,6 +207,7 @@ public class MainActivity extends AppCompatActivity {
         Button hello = MyDialog.findViewById(R.id.hello);
         Button hello2 = MyDialog.findViewById(R.id.hello2);
         ImageView image = MyDialog.findViewById(R.id.imageViewDialog);
+        TextView textMeio = MyDialog.findViewById(R.id.textMeio);
 
         image.setImageDrawable(ContextCompat.getDrawable(MainActivity.this, R.drawable.porcotriste));
 
@@ -239,6 +216,7 @@ public class MainActivity extends AppCompatActivity {
 
         hello.setText("Nova Questão");
         hello2.setText("Voltar ao Menu");
+        textMeio.setText("Resposta Errada");
 
         hello.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -265,29 +243,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-               /*AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MainActivity.this);
-                alertDialogBuilder.setMessage("Resposta Correta!" );
-                alertDialogBuilder.setCancelable(false);
-                alertDialogBuilder.setPositiveButton("Nova Questão",
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-
-                                proximaQuestao();
-                            }
-                        });
-                alertDialogBuilder.setNegativeButton("Voltar ao Menu",
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                startActivity(new Intent(MainActivity.this,Menu.class));
-                                finish();
-                            }
-
-                        });
-                AlertDialog alertDialog = alertDialogBuilder.create();
-                alertDialog.show();*/
-
                 MyDialog = new Dialog(MainActivity.this);
                 MyDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 MyDialog.setContentView(R.layout.alert_dialog_modificado);
@@ -296,6 +251,8 @@ public class MainActivity extends AppCompatActivity {
 
                 Button hello = MyDialog.findViewById(R.id.hello);
                 Button hello2 = MyDialog.findViewById(R.id.hello2);
+                TextView textMeio = MyDialog.findViewById(R.id.textMeio);
+
                 ImageView image = MyDialog.findViewById(R.id.imageViewDialog);
 
                 image.setImageDrawable(ContextCompat.getDrawable(MainActivity.this, R.drawable.porcofeliz));
@@ -305,6 +262,7 @@ public class MainActivity extends AppCompatActivity {
 
                 hello.setText("Nova Questão");
                 hello2.setText("Voltar ao Menu");
+                textMeio.setText("Resposta Correta");
 
                 hello.setOnClickListener(new View.OnClickListener() {
                     @Override
