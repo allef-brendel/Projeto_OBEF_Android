@@ -27,8 +27,8 @@ import java.util.List;
 
 public class MenuPontos extends AppCompatActivity {
 
-    private String[] itens = {"","","","","","","","","",""};
-    private String[] itens2 = {"","","","","","","","","",""};
+    private String[] itens = {"","",""};
+    private String[] itens2 = {"","",""};
 
     public ListView listView;
     public ListView listView2;
