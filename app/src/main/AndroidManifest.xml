@@ -17,13 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".AcertouErrou.Errou"
-            android:screenOrientation="portrait"></activity>
-        <activity
-            android:name=".AcertouErrou.Acertou"
-            android:label="@string/title_activity_acertou"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait"/>
+
         <activity android:name=".Activity.RecuperarQuestao"
             android:screenOrientation="portrait"/>
         <activity
@@ -70,9 +64,6 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".Activity.Menu"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".Activity.MenuCadastro"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Activity.MenuPontos"

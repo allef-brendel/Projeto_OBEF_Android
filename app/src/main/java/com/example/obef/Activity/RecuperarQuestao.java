@@ -140,6 +140,7 @@ public class RecuperarQuestao extends AppCompatActivity {
     private void abriTelaPrincipal() {
 
         Intent intent = new Intent(RecuperarQuestao.this, Menu.class);
+        overridePendingTransition(R.anim.goup, R.anim.godown);
         startActivity(intent);
         finish();
     }

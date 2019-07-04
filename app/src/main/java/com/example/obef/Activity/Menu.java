@@ -78,6 +78,7 @@ public class Menu extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Menu.this, MainActivity.class));
+                overridePendingTransition(R.anim.goup, R.anim.godown);
                 finish();
             }
         });
@@ -86,6 +87,7 @@ public class Menu extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Menu.this, MenuPontos.class));
+                overridePendingTransition(R.anim.goup, R.anim.godown);
                 finish();
             }
         });
@@ -94,6 +96,7 @@ public class Menu extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Menu.this, MenuQuestoes.class));
+                overridePendingTransition(R.anim.goup, R.anim.godown);
                 finish();
             }
         });
@@ -102,6 +105,7 @@ public class Menu extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Menu.this, MenuInformacao.class));
+                overridePendingTransition(R.anim.goup, R.anim.godown);
                 finish();
             }
         });
@@ -141,6 +145,7 @@ public class Menu extends AppCompatActivity {
         System.out.println("123123  "+gravador.lerArquivo("LastUser.txt"));
         Intent intent = new Intent(Menu.this,ActivityLogin.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.goup, R.anim.godown);
         finish();
     }
 

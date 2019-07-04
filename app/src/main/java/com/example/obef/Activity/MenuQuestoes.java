@@ -40,6 +40,7 @@ public  class MenuQuestoes extends AppCompatActivity {
     @Override
     public void onBackPressed(){
         startActivity(new Intent(MenuQuestoes.this, Menu.class));
+        overridePendingTransition(R.anim.goup, R.anim.godown);
         finish();
     }
     @Override
@@ -140,6 +141,7 @@ public  class MenuQuestoes extends AppCompatActivity {
             public void onClick(View v) {
                 if (Gravador.listaMoedas.get(0).equals("1")) {
                     startActivity(new Intent(MenuQuestoes.this, Desafio1.class));
+                    overridePendingTransition(R.anim.goup, R.anim.godown);
                     finish();
                 }else {
                     Toast.makeText(MenuQuestoes.this, "Desafio já concluido", Toast.LENGTH_SHORT).show();
@@ -152,6 +154,7 @@ public  class MenuQuestoes extends AppCompatActivity {
             public void onClick(View v) {
                 if (Gravador.listaMoedas.get(1).equals("1")) {
                     startActivity(new Intent(MenuQuestoes.this, Desafio2.class));
+                    overridePendingTransition(R.anim.goup, R.anim.godown);
                     finish();
                 }else {
                     Toast.makeText(MenuQuestoes.this, "Desafio já concluido", Toast.LENGTH_SHORT).show();
@@ -164,6 +167,7 @@ public  class MenuQuestoes extends AppCompatActivity {
             public void onClick(View v) {
                 if (Gravador.listaMoedas.get(2).equals("1")) {
                     startActivity(new Intent(MenuQuestoes.this, Desafio3.class));
+                    overridePendingTransition(R.anim.goup, R.anim.godown);
                     finish();
                 }else {
                     Toast.makeText(MenuQuestoes.this, "Desafio já concluido", Toast.LENGTH_SHORT).show();
@@ -176,6 +180,7 @@ public  class MenuQuestoes extends AppCompatActivity {
             public void onClick(View v) {
                 if (Gravador.listaMoedas.get(3).equals("1")) {
                     startActivity(new Intent(MenuQuestoes.this, Desafio4.class));
+                    overridePendingTransition(R.anim.goup, R.anim.godown);
                     finish();
                 }else {
                     Toast.makeText(MenuQuestoes.this, "Desafio já concluido", Toast.LENGTH_SHORT).show();
@@ -188,6 +193,7 @@ public  class MenuQuestoes extends AppCompatActivity {
             public void onClick(View v) {
                 if (Gravador.listaMoedas.get(4).equals("1")) {
                     startActivity(new Intent(MenuQuestoes.this, Desafio5.class));
+                    overridePendingTransition(R.anim.goup, R.anim.godown);
                     finish();
                 }else {
                     Toast.makeText(MenuQuestoes.this, "Desafio já concluido", Toast.LENGTH_SHORT).show();
@@ -200,6 +206,7 @@ public  class MenuQuestoes extends AppCompatActivity {
             public void onClick(View v) {
                 if (Gravador.listaMoedas.get(5).equals("1")) {
                     startActivity(new Intent(MenuQuestoes.this, Desafio6.class));
+                    overridePendingTransition(R.anim.goup, R.anim.godown);
                     finish();
                 }else {
                     Toast.makeText(MenuQuestoes.this, "Desafio já concluido", Toast.LENGTH_SHORT).show();
@@ -212,6 +219,7 @@ public  class MenuQuestoes extends AppCompatActivity {
             public void onClick(View v) {
                 if (Gravador.listaMoedas.get(6).equals("1")) {
                     startActivity(new Intent(MenuQuestoes.this, Desafio7.class));
+                    overridePendingTransition(R.anim.goup, R.anim.godown);
                     finish();
                 }else {
                     Toast.makeText(MenuQuestoes.this, "Desafio já concluido", Toast.LENGTH_SHORT).show();
@@ -224,6 +232,7 @@ public  class MenuQuestoes extends AppCompatActivity {
             public void onClick(View v) {
                 if (Gravador.listaMoedas.get(7).equals("1")) {
                     startActivity(new Intent(MenuQuestoes.this, Desafio8.class));
+                    overridePendingTransition(R.anim.goup, R.anim.godown);
                     finish();
                 }else {
                     Toast.makeText(MenuQuestoes.this, "Desafio já concluido", Toast.LENGTH_SHORT).show();
@@ -236,6 +245,7 @@ public  class MenuQuestoes extends AppCompatActivity {
             public void onClick(View v) {
                 if (Gravador.listaMoedas.get(8).equals("1")) {
                     startActivity(new Intent(MenuQuestoes.this, Desafio9.class));
+                    overridePendingTransition(R.anim.goup, R.anim.godown);
                     finish();
                 }else {
                     Toast.makeText(MenuQuestoes.this, "Desafio já concluido", Toast.LENGTH_SHORT).show();
@@ -248,6 +258,7 @@ public  class MenuQuestoes extends AppCompatActivity {
             public void onClick(View v) {
                 if (Gravador.listaMoedas.get(9).equals("1")) {
                     startActivity(new Intent(MenuQuestoes.this, Desafio10.class));
+                    overridePendingTransition(R.anim.goup, R.anim.godown);
                     finish();
                 }else {
                     Toast.makeText(MenuQuestoes.this, "Desafio já concluido", Toast.LENGTH_SHORT).show();

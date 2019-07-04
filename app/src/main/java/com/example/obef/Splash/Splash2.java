@@ -38,6 +38,7 @@ public class Splash2 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Splash2.this, ActivityLogin.class));
+                overridePendingTransition(R.anim.goup, R.anim.goup);
                 finish();
             }
         });

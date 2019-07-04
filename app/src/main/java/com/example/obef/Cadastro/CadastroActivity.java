@@ -46,6 +46,7 @@ public class CadastroActivity extends AppCompatActivity {
     @Override
     public void onBackPressed(){
         startActivity(new Intent(this,ActivityLogin.class));
+        overridePendingTransition(R.anim.goup, R.anim.godown);
         finish();
     }
 
@@ -138,6 +139,7 @@ public class CadastroActivity extends AppCompatActivity {
     public void abrirLoginUsuario(){
         Intent intent = new Intent(CadastroActivity.this, ActivityLogin.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.goup, R.anim.godown);
         finish();
     }
 }

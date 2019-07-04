@@ -53,6 +53,7 @@ public abstract class Desafio extends AppCompatActivity {
     @Override
     public void onBackPressed(){
         startActivity(new Intent(desafio, MenuQuestoes.class));
+        overridePendingTransition(R.anim.goup, R.anim.godown);
         finish();
     }
     @Override
@@ -203,6 +204,7 @@ public abstract class Desafio extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Desafio.this, MenuQuestoes.class));
+                overridePendingTransition(R.anim.goup, R.anim.godown);
                 finish();
             }
         });
@@ -237,6 +239,7 @@ public abstract class Desafio extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Desafio.this, MenuQuestoes.class));
+                overridePendingTransition(R.anim.goup, R.anim.godown);
                 finish();
             }
         });

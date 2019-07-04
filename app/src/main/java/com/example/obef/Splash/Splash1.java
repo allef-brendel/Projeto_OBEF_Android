@@ -69,6 +69,7 @@ public class Splash1 extends AppCompatActivity {
                 // E inicia a activity principal
                 Intent i = new Intent(Splash1.this, Splash2.class);
                 startActivity(i);
+                overridePendingTransition(R.anim.goup, R.anim.goup);
 
                 // Fecha esta activity
                 finish();

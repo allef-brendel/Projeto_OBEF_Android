@@ -109,6 +109,7 @@ public class ActivityLogin extends AppCompatActivity {
             public void onClick(View v) {
                 botoesInvisiveis();
                 startActivity(new Intent(ActivityLogin.this,CadastroActivity.class));
+                overridePendingTransition(R.anim.goup, R.anim.godown);
                 finish();
             }
         });
@@ -153,6 +154,7 @@ public class ActivityLogin extends AppCompatActivity {
         gravador.gravarArquivo("LastUser.txt","0");
         Intent intent = new Intent(ActivityLogin.this,RecuperarQuestao.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.goup, R.anim.goup);
         finish();
     }
 

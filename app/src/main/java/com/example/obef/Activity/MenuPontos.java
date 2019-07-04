@@ -45,6 +45,7 @@ public class MenuPontos extends AppCompatActivity {
     @Override
     public void onBackPressed(){
         startActivity(new Intent(this,Menu.class));
+        overridePendingTransition(R.anim.goup, R.anim.godown);
         finish();
     }
     @Override
