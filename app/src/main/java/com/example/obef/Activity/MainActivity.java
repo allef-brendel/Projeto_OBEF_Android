@@ -1,9 +1,11 @@
 package com.example.obef.Activity;
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,6 +19,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.obef.Activity.DesafioDoDia.Desafio;
 import com.example.obef.Gerenciamento.BancoDeQuestoes;
 import com.example.obef.Modelos.Escola;
 import com.example.obef.Modelos.Questao;
@@ -52,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
     private RadioButton radioButton4;
     private RadioButton radioButton5;
     private RadioButton radioButtonEscolhido;
+    private ProgressDialog pdia;
     private RadioGroup radioGroup;
     private Random rd;
     private int id;
@@ -65,6 +69,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        pdia = new ProgressDialog(MainActivity.this);
+        pdia.setMessage("Carregando...");
+        pdia.show();
 
         setarContent();
         rd = new Random();
@@ -107,6 +115,8 @@ public class MainActivity extends AppCompatActivity {
                 radioButton4.setText(alternativa4);
                 String alternativa5 = (String) dataSnapshot.child("Questoes").child(""+id).child("alternativa5").child("texto").getValue();
                 radioButton5.setText(alternativa5);
+
+                pdia.cancel();
             }
 
             @Override
@@ -188,7 +198,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void gameOver() {
 
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MainActivity.this);
+        /*AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MainActivity.this);
         alertDialogBuilder.setMessage("Resposta Incorreta!");
         alertDialogBuilder.setCancelable(false);
         alertDialogBuilder.setPositiveButton("Nova Questão",
@@ -210,7 +220,43 @@ public class MainActivity extends AppCompatActivity {
 
                 });
         AlertDialog alertDialog = alertDialogBuilder.create();
-        alertDialog.show();
+        alertDialog.show();*/
+
+        MyDialog = new Dialog(MainActivity.this);
+        MyDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        MyDialog.setContentView(R.layout.alert_dialog_modificado);
+        MyDialog.setCancelable(false);
+        MyDialog.setTitle("Resposta Errada");
+
+        Button hello = MyDialog.findViewById(R.id.hello);
+        Button hello2 = MyDialog.findViewById(R.id.hello2);
+        ImageView image = MyDialog.findViewById(R.id.imageViewDialog);
+
+        image.setImageDrawable(ContextCompat.getDrawable(MainActivity.this, R.drawable.porcotriste));
+
+        hello.setEnabled(true);
+        hello2.setEnabled(true);
+
+        hello.setText("Nova Questão");
+        hello2.setText("Voltar ao Menu");
+
+        hello.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                proximaQuestao();
+            }
+        });
+
+        hello2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this,Menu.class));
+                finish();
+            }
+        });
+
+        MyDialog.show();
+
     }
 
     private void respostaCerta() {
@@ -219,7 +265,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-               AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MainActivity.this);
+               /*AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MainActivity.this);
                 alertDialogBuilder.setMessage("Resposta Correta!" );
                 alertDialogBuilder.setCancelable(false);
                 alertDialogBuilder.setPositiveButton("Nova Questão",
@@ -240,8 +286,42 @@ public class MainActivity extends AppCompatActivity {
 
                         });
                 AlertDialog alertDialog = alertDialogBuilder.create();
-                alertDialog.show();
+                alertDialog.show();*/
 
+                MyDialog = new Dialog(MainActivity.this);
+                MyDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                MyDialog.setContentView(R.layout.alert_dialog_modificado);
+                MyDialog.setCancelable(false);
+                MyDialog.setTitle("Resposta Certa");
+
+                Button hello = MyDialog.findViewById(R.id.hello);
+                Button hello2 = MyDialog.findViewById(R.id.hello2);
+                ImageView image = MyDialog.findViewById(R.id.imageViewDialog);
+
+                image.setImageDrawable(ContextCompat.getDrawable(MainActivity.this, R.drawable.porcofeliz));
+
+                hello.setEnabled(true);
+                hello2.setEnabled(true);
+
+                hello.setText("Nova Questão");
+                hello2.setText("Voltar ao Menu");
+
+                hello.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        proximaQuestao();
+                    }
+                });
+
+                hello2.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(new Intent(MainActivity.this,Menu.class));
+                        finish();
+                    }
+                });
+
+                MyDialog.show();
             }
 
             @Override
@@ -252,9 +332,5 @@ public class MainActivity extends AppCompatActivity {
     private void proximaQuestao(){
         startActivity(new Intent(MainActivity.this,MainActivity.class));
         finish();
-    }
-
-    public void MyCustomAlertDialog(){
-
     }
 }

@@ -1,5 +1,6 @@
 package com.example.obef.Activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -26,8 +27,8 @@ import java.util.List;
 
 public class MenuPontos extends AppCompatActivity {
 
-    private String[] itens = {"Allef Brendel","Gerson Vierira",""};
-    private String[] itens2 = {"1220","1219",""};
+    private String[] itens = {"","","","","","","","","",""};
+    private String[] itens2 = {"","","","","","","","","",""};
 
     public ListView listView;
     public ListView listView2;
@@ -35,6 +36,8 @@ public class MenuPontos extends AppCompatActivity {
     public TextView viewPontosTotais;
     private Gravador gravador;
     DatabaseReference firebase;
+    private ProgressDialog pdia;
+
     @Override
     public void onBackPressed(){
         startActivity(new Intent(this,Menu.class));
@@ -42,6 +45,10 @@ public class MenuPontos extends AppCompatActivity {
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        pdia = new ProgressDialog(MenuPontos.this);
+        pdia.setMessage("Carregando...");
+        pdia.show();
+
         gravador=new Gravador();
         super.onCreate(savedInstanceState);
         DisplayMetrics displayMetrics = new DisplayMetrics();
@@ -54,7 +61,6 @@ public class MenuPontos extends AppCompatActivity {
         }else{
             setContentView(R.layout.activity_tela_pontos);
         }
-
 
         firebase= FirebaseDatabase.getInstance().getReference();
 
@@ -100,6 +106,7 @@ public class MenuPontos extends AppCompatActivity {
                         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_list_item_1, android.R.id.text1, itens);
                         listView.setAdapter(adapter);
 
+                        pdia.cancel();
 
                     }
 

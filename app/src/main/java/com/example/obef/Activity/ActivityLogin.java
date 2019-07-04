@@ -1,6 +1,7 @@
 package com.example.obef.Activity;
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -41,7 +42,9 @@ public class ActivityLogin extends AppCompatActivity {
     private Aluno aluno;
     private FirebaseAuth autenticacao;
     private Gravador gravador;
+    private ProgressDialog pdia;
     boolean online;
+
 
     @Override
     public void onBackPressed(){
@@ -52,6 +55,7 @@ public class ActivityLogin extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         gravador=new Gravador();
         super.onCreate(savedInstanceState);
+
         setarContet();
         validarUsuario();
 
@@ -59,7 +63,6 @@ public class ActivityLogin extends AppCompatActivity {
 
     private void validarUsuario() {
         if(!validouUserOffline()){
-            System.out.println("asdasdasdasdasdasdasdasdasd");
             cadastrar();
         }else {
             gravador.gravarArquivo("LastUser.txt","0");
@@ -135,7 +138,6 @@ public class ActivityLogin extends AppCompatActivity {
     public boolean validouUserOffline(){
         System.out.println("asdasd  " +gravador.lerArquivo("LastUser.txt"));
         if(gravador.lerArquivo("LastUser.txt").length()>0 &&Integer.parseInt(gravador.lerArquivo("LastUser.txt").substring(0,1))==1){
-            System.out.println("asdasdasdasdasdasdasdasdasdasdasdasdasd");
             return false;
         }
         System.out.println("asdasd  " +gravador.lerArquivo("LastUser.txt"));
@@ -147,6 +149,7 @@ public class ActivityLogin extends AppCompatActivity {
     }
 
     public void abriTelaPrincipal(){
+
         gravador.gravarArquivo("LastUser.txt","0");
         Intent intent = new Intent(ActivityLogin.this,RecuperarQuestao.class);
         startActivity(intent);

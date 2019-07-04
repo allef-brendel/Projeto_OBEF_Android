@@ -1,5 +1,6 @@
 package com.example.obef.Activity;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -41,6 +42,7 @@ public class Menu extends AppCompatActivity {
     private Button botaoInformacao;
     private Button botaoDeslogar;
     private Gravador gravador;
+    private ProgressDialog pdia;
 
     private FirebaseAuth autenticacao;
     @Override

@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="300dp"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@drawable/tela_dialog">
 
     <ImageView
         android:id="@+id/imageViewDialog"
@@ -17,7 +18,8 @@
         android:id="@+id/textMeio"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/justificativa"
+        android:text=""
+        android:textStyle="bold"
         android:textAlignment="center"
         android:textSize="18dp"/>
 
@@ -28,20 +30,31 @@
         android:layout_margin="5dp"
         android:layout_height="wrap_content" />
 
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_margin="10dp"
+        android:orientation="horizontal"
         android:layout_marginBottom="5dp"
         android:layout_height="wrap_content">
-        <Button
-            android:layout_width="match_parent"
-            android:layout_gravity="center|left"
-            android:text="@string/menu_de_quest"
-            android:layout_margin="5dp"
-            android:textStyle="bold"
-            style="?android:attr/borderlessButtonStyle"
-            android:id="@+id/hello"
-            android:layout_height="wrap_content" />
 
-    </FrameLayout>
+            <Button
+                android:layout_width="wrap_content"
+                android:text="@string/menu_de_quest"
+                android:layout_margin="2dp"
+                android:textAlignment="center"
+                android:textStyle="bold"
+                style="?android:attr/buttonBarButtonStyle"
+                android:id="@+id/hello"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/hello2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:text=""
+                android:layout_margin="2dp"
+                android:textStyle="bold"
+                style="?android:attr/buttonBarButtonStyle" />
+    </LinearLayout>
 </LinearLayout>

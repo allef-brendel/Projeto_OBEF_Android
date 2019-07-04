@@ -3,4 +3,9 @@
   <color name="grey">#ddd</color>
   <color name="black">#000</color>
 
+  <color name="colorAccent">#000</color>
+  <color name="colorPrimary">#000</color>
+  <color name="colorPrimaryDark">#000</color>
+
+
 </resources>

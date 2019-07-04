@@ -1,5 +1,6 @@
 package com.example.obef.Activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -19,6 +20,9 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.Random;
 
 public class RecuperarQuestao extends AppCompatActivity {
+
+    private ProgressDialog pdia;
+
     Gravador gravador;
     @Override
     public void onBackPressed(){
@@ -26,6 +30,10 @@ public class RecuperarQuestao extends AppCompatActivity {
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        pdia = new ProgressDialog(RecuperarQuestao.this);
+        pdia.setMessage("Carregando...");
+        pdia.show();
+
         gravador=new Gravador();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recuperar_questao);
@@ -39,17 +47,13 @@ public class RecuperarQuestao extends AppCompatActivity {
                         String diaLogado=dataSnapshot.child("Acertos").child(Base64Custom.codificarBase64(gravador.lerUser())).child("ultimoDiaLogado").getValue(String.class);
                         System.out.println(diaLogado);
                         if(diaLogado.equals("0")){
-                            System.out.println("Rntrou 1");
                             firebase.child("Acertos").child(Base64Custom.codificarBase64(gravador.lerUser())).child("ultimoDiaLogado").setValue(gravador.lerDataAtual());
                             gravador.salvarData(gravador.lerDataAtual());
                             resetarQuestoes(firebase,dataSnapshot);
                             gravador.gravarOffline();
 
                         }
-
                     }
-
-
                 }
 
                 @Override
@@ -79,7 +83,6 @@ public class RecuperarQuestao extends AppCompatActivity {
                 abriTelaPrincipal();
             }else {
                 gravador.gravarOffline();
-                System.out.println("Rntrou 5");
                 final DatabaseReference firebase = FirebaseDatabase.getInstance().getReference();
                 firebase.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -135,6 +138,7 @@ public class RecuperarQuestao extends AppCompatActivity {
     }
 
     private void abriTelaPrincipal() {
+
         Intent intent = new Intent(RecuperarQuestao.this, Menu.class);
         startActivity(intent);
         finish();
@@ -195,6 +199,8 @@ public class RecuperarQuestao extends AppCompatActivity {
         gravador.salvarQuestao("Questao9.txt", q9);
         gravador.salvarQuestao("Questao10.txt", q10);
         gravador.salvarData(gravador.lerData());
+
+        pdia.cancel();
         abriTelaPrincipal();
     }
     public void bloquearDesafio(){
