@@ -8,7 +8,7 @@
 
     <Button
         android:id="@+id/botaoJogar"
-        android:layout_width="131dp"
+        android:layout_width="121dp"
         android:layout_height="59dp"
         android:layout_marginStart="40dp"
         android:layout_marginLeft="40dp"
@@ -38,7 +38,7 @@
 
     <Button
         android:id="@+id/botaoPontos"
-        android:layout_width="132dp"
+        android:layout_width="121dp"
         android:layout_height="56dp"
         android:layout_marginStart="190dp"
         android:layout_marginLeft="190dp"

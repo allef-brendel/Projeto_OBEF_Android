@@ -27,10 +27,10 @@ public class MenuInformacao extends AppCompatActivity {
         int height = displayMetrics.heightPixels;
         int width = displayMetrics.widthPixels;
 
-        if (width == 1080 && height == 1920) {
-            setContentView(R.layout.layout_1920_informacoes);
-        } else {
+   //     if (width == 1080 && height == 1920) {
+     //       setContentView(R.layout.layout_1920_informacoes);
+     //   } else {
             setContentView(R.layout.activity_tela_informacoes);
-        }
+       // }
     }
 }

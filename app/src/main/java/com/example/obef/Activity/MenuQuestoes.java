@@ -55,11 +55,11 @@ public  class MenuQuestoes extends AppCompatActivity {
         int height = displayMetrics.heightPixels;
         int width = displayMetrics.widthPixels;
 
-        if(width==1080 && height==1920){
+        /*if(width==1080 && height==1920){
             setContentView(R.layout.layout_1920_moedas);
-        }else{
+        }else{*/
             setContentView(R.layout.activity_tela_moedas);
-        }
+       // }
 
 
         botaoMoeda1 = findViewById(R.id.botaomoeda1);

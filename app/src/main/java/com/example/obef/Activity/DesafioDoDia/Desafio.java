@@ -67,7 +67,7 @@ public abstract class Desafio extends AppCompatActivity {
         Gravador.listaMoedas.set(gerarID()-1,"2");
         gravador.salvarMoedas();
         gravador.salvarQuantQuestoesAcertadas();
-        setarContent();
+        setContentView(R.layout.activity_tela_desafiododia);
         setarComponentes();
         desafio=this;
         auth= ConfiguracaoFirebase.getFireBaseAutenticacao();
@@ -144,19 +144,6 @@ public abstract class Desafio extends AppCompatActivity {
         buttonEscolher = findViewById(R.id.escolherId);
         buttonDica = findViewById(R.id.dicaId);
         testviwe =  findViewById(R.id.textoID);
-    }
-
-    private void setarContent() {
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        int height = displayMetrics.heightPixels;
-        int width = displayMetrics.widthPixels;
-
-        if(width==1080 && height==1920){
-            setContentView(R.layout.layout_1920_desafiododia);
-        }else{
-            setContentView(R.layout.activity_tela_desafiododia);
-        }
     }
 
     private void statusGameOver(int alternativa){

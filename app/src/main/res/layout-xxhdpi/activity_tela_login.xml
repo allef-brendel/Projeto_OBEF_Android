@@ -41,7 +41,7 @@
     <EditText
         android:id="@+id/editeText_login_email"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="50dp"
         android:layout_marginStart="40dp"
         android:layout_marginLeft="40dp"
         android:layout_marginEnd="40dp"
@@ -60,7 +60,7 @@
     <EditText
         android:id="@+id/editText_login_senha"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="50dp"
         android:layout_marginStart="40dp"
         android:layout_marginLeft="40dp"
         android:layout_marginEnd="40dp"

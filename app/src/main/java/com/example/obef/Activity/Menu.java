@@ -58,11 +58,11 @@ public class Menu extends AppCompatActivity {
         int height = displayMetrics.heightPixels;
         int width = displayMetrics.widthPixels;
         System.out.println("DPI  "+displayMetrics.densityDpi);
-        if(width==1080 && height==1920){
-            setContentView(R.layout.layout_1920_menu);
-        }else{
+     //   if(width==1080 && height==1920){
+       //     setContentView(R.layout.layout_1920_menu);
+       // }else{
             setContentView(R.layout.activity_tela_menu);
-        }
+       // }
 
 
 

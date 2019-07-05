@@ -23,22 +23,22 @@
 
     <ImageView
         android:id="@+id/botaomoeda1"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:layout_marginStart="30dp"
         android:layout_marginLeft="30dp"
         android:layout_marginEnd="10dp"
         android:layout_marginRight="10dp"
         android:background="@drawable/moeda1"
         app:layout_constraintEnd_toStartOf="@+id/botaomoeda2"
-        app:layout_constraintHorizontal_bias="0.391"
+        app:layout_constraintHorizontal_bias="0.733"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/quantQuestoesAcertadas" />
 
     <ImageView
         android:id="@+id/botaomoeda2"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:layout_marginEnd="20dp"
         android:layout_marginRight="20dp"
         android:background="@drawable/moeda2"
@@ -47,8 +47,8 @@
 
     <ImageView
         android:id="@+id/botaomoeda3"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:layout_marginStart="220dp"
         android:layout_marginLeft="220dp"
         android:layout_marginEnd="30dp"
@@ -61,8 +61,8 @@
 
     <ImageView
         android:id="@+id/botaomoeda4"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="24dp"
@@ -76,8 +76,8 @@
 
     <ImageView
         android:id="@+id/botaomoeda5"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:layout_marginStart="188dp"
         android:layout_marginLeft="188dp"
         android:layout_marginTop="24dp"
@@ -91,8 +91,8 @@
 
     <ImageView
         android:id="@+id/botaomoeda6"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"
@@ -105,8 +105,8 @@
 
     <ImageView
         android:id="@+id/botaomoeda7"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="20dp"
@@ -118,8 +118,8 @@
 
     <ImageView
         android:id="@+id/botaomoeda8"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:layout_marginStart="36dp"
         android:layout_marginLeft="36dp"
         android:layout_marginTop="20dp"
@@ -129,8 +129,8 @@
 
     <ImageView
         android:id="@+id/botaomoeda9"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="24dp"
@@ -147,8 +147,8 @@
 
     <ImageView
         android:id="@+id/botaomoeda10"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:layout_marginStart="170dp"
         android:layout_marginLeft="170dp"
         android:layout_marginTop="24dp"
