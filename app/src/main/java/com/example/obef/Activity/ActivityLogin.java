@@ -3,14 +3,18 @@ package com.example.obef.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.obef.Cadastro.CadastroActivity;
@@ -33,7 +37,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 
-public class ActivityLogin extends AppCompatActivity {
+public class ActivityLogin extends AppCompatActivity implements TextView.OnEditorActionListener {
 
     private EditText email;
     private EditText senha;
@@ -89,6 +93,8 @@ public class ActivityLogin extends AppCompatActivity {
         senha = findViewById(R.id.editText_login_senha);
         botaoCadastrese = findViewById(R.id.botaoCadastrese);
         botaoLogar = findViewById(R.id.botaoLogin);
+
+        senha.setOnEditorActionListener(this);
 
         botaoLogar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -226,15 +232,15 @@ public class ActivityLogin extends AppCompatActivity {
         try {
             throw task.getException();
         } catch (FirebaseAuthInvalidUserException e) {
-            erroExecao = "E-mail não cadastrado";
+            email.setError("E-mail não cadastrado");
         } catch (FirebaseAuthInvalidCredentialsException e) {
-            erroExecao = "E-mail ou senha invalidos";
+            senha.setError("E-mail ou senha invalidos");
         } catch (Exception e) {
-            erroExecao = "Erro ao efetuar o login";
+            Toast.makeText(ActivityLogin.this, "Erro ao efetuar o login. Verifique sua conexão com a internet.", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
-        Toast.makeText(ActivityLogin.this, erroExecao, Toast.LENGTH_SHORT).show();
         botaoLogar.setVisibility(View.VISIBLE);
+        botaoCadastrese.setVisibility(View.VISIBLE);
 
     }
     private void bloqueioDesafioSeSegundoLogin(){
@@ -243,5 +249,20 @@ public class ActivityLogin extends AppCompatActivity {
         } else if (gravador.compararData(gravador.lerData())) {
             gravador.bloquearDesafio();
         }
+    }
+
+    @Override
+    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+        if (EditorInfo.IME_ACTION_DONE == actionId) {
+            botoesInvisiveis();
+            aluno = new Aluno();
+            aluno.setEmail(email.getText().toString().toLowerCase());
+            aluno.setSenha(senha.getText().toString());
+            if (email.getText().toString().toLowerCase().equals("") || senha.getText().toString().equals("")) {
+                Toast.makeText(ActivityLogin.this, "Digite e-mail e senha", Toast.LENGTH_LONG).show();
+                botoesVisiveis();
+            } else validarLogin();
+        }
+        return false;
     }
 }

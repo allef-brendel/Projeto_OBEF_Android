@@ -2,18 +2,16 @@ package com.example.obef.Activity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.service.notification.NotificationListenerService;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.obef.AbasAdapter;
+import com.example.obef.Adapter.AbasAdapter;
 import com.example.obef.Gerenciamento.Gravador;
 import com.example.obef.R;
 import com.google.firebase.database.DataSnapshot;
