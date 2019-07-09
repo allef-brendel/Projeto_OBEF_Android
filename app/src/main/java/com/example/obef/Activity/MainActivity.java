@@ -12,6 +12,8 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.Window;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -60,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
     private Random rd;
     private int id;
     private Dialog MyDialog;
+    private AlphaAnimation animation;
 
     @Override
     public void onBackPressed(){
@@ -130,6 +133,7 @@ public class MainActivity extends AppCompatActivity {
         buttonDica.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                animacaoBotao(buttonDica);
                 firebaseDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
 
                     @Override
@@ -139,7 +143,6 @@ public class MainActivity extends AppCompatActivity {
                         alertDialogBuilder.setMessage(string2);
                         AlertDialog alertDialog = alertDialogBuilder.create();
                         alertDialog.show();
-
                     }
 
                     @Override
@@ -155,6 +158,7 @@ public class MainActivity extends AppCompatActivity {
         buttonEscolher.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                animacaoBotao(buttonEscolher);
                 firebaseDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
 
                     @Override
@@ -292,6 +296,15 @@ public class MainActivity extends AppCompatActivity {
     }
     private void proximaQuestao(){
         startActivity(new Intent(MainActivity.this,MainActivity.class));
+        overridePendingTransition(R.anim.goup, R.anim.godown);
         finish();
     }
+
+    public void animacaoBotao(Button button){
+        animation = new AlphaAnimation(1, 0); // Altera alpha de visível a invisível
+        animation.setDuration(200);
+        animation.setInterpolator(new LinearInterpolator());
+        button.startAnimation(animation);
+    }
+
 }

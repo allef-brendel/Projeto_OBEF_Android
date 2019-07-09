@@ -6,6 +6,9 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.LinearInterpolator;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -35,6 +38,8 @@ public  class MenuQuestoes extends AppCompatActivity {
     private ImageView botaoMoeda9;
     private ImageView botaoMoeda10;
 
+    private AlphaAnimation animation;
+
     private ImageView quantQuestoesAcertadas;
     private Gravador  gravador;
     @Override
@@ -50,17 +55,7 @@ public  class MenuQuestoes extends AppCompatActivity {
         gravador=new Gravador();
         gravador.recuperarMoedas();
 
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        int height = displayMetrics.heightPixels;
-        int width = displayMetrics.widthPixels;
-
-        /*if(width==1080 && height==1920){
-            setContentView(R.layout.layout_1920_moedas);
-        }else{*/
-            setContentView(R.layout.activity_tela_moedas);
-       // }
-
+        setContentView(R.layout.activity_tela_moedas);
 
         botaoMoeda1 = findViewById(R.id.botaomoeda1);
         botaoMoeda2 = findViewById(R.id.botaomoeda2);
@@ -139,6 +134,7 @@ public  class MenuQuestoes extends AppCompatActivity {
         botaoMoeda1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                animacaoBotao(botaoMoeda1);
                 if (Gravador.listaMoedas.get(0).equals("1")) {
                     startActivity(new Intent(MenuQuestoes.this, Desafio1.class));
                     overridePendingTransition(R.anim.goup, R.anim.godown);
@@ -152,6 +148,7 @@ public  class MenuQuestoes extends AppCompatActivity {
         botaoMoeda2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                animacaoBotao(botaoMoeda2);
                 if (Gravador.listaMoedas.get(1).equals("1")) {
                     startActivity(new Intent(MenuQuestoes.this, Desafio2.class));
                     overridePendingTransition(R.anim.goup, R.anim.godown);
@@ -165,6 +162,7 @@ public  class MenuQuestoes extends AppCompatActivity {
         botaoMoeda3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                animacaoBotao(botaoMoeda3);
                 if (Gravador.listaMoedas.get(2).equals("1")) {
                     startActivity(new Intent(MenuQuestoes.this, Desafio3.class));
                     overridePendingTransition(R.anim.goup, R.anim.godown);
@@ -178,6 +176,7 @@ public  class MenuQuestoes extends AppCompatActivity {
         botaoMoeda4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                animacaoBotao(botaoMoeda4);
                 if (Gravador.listaMoedas.get(3).equals("1")) {
                     startActivity(new Intent(MenuQuestoes.this, Desafio4.class));
                     overridePendingTransition(R.anim.goup, R.anim.godown);
@@ -191,6 +190,7 @@ public  class MenuQuestoes extends AppCompatActivity {
         botaoMoeda5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                animacaoBotao(botaoMoeda5);
                 if (Gravador.listaMoedas.get(4).equals("1")) {
                     startActivity(new Intent(MenuQuestoes.this, Desafio5.class));
                     overridePendingTransition(R.anim.goup, R.anim.godown);
@@ -204,6 +204,7 @@ public  class MenuQuestoes extends AppCompatActivity {
         botaoMoeda6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                animacaoBotao(botaoMoeda6);
                 if (Gravador.listaMoedas.get(5).equals("1")) {
                     startActivity(new Intent(MenuQuestoes.this, Desafio6.class));
                     overridePendingTransition(R.anim.goup, R.anim.godown);
@@ -217,6 +218,7 @@ public  class MenuQuestoes extends AppCompatActivity {
         botaoMoeda7.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                animacaoBotao(botaoMoeda7);
                 if (Gravador.listaMoedas.get(6).equals("1")) {
                     startActivity(new Intent(MenuQuestoes.this, Desafio7.class));
                     overridePendingTransition(R.anim.goup, R.anim.godown);
@@ -230,6 +232,7 @@ public  class MenuQuestoes extends AppCompatActivity {
         botaoMoeda8.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                animacaoBotao(botaoMoeda8);
                 if (Gravador.listaMoedas.get(7).equals("1")) {
                     startActivity(new Intent(MenuQuestoes.this, Desafio8.class));
                     overridePendingTransition(R.anim.goup, R.anim.godown);
@@ -243,6 +246,7 @@ public  class MenuQuestoes extends AppCompatActivity {
         botaoMoeda9.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                animacaoBotao(botaoMoeda9);
                 if (Gravador.listaMoedas.get(8).equals("1")) {
                     startActivity(new Intent(MenuQuestoes.this, Desafio9.class));
                     overridePendingTransition(R.anim.goup, R.anim.godown);
@@ -256,6 +260,7 @@ public  class MenuQuestoes extends AppCompatActivity {
         botaoMoeda10.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                animacaoBotao(botaoMoeda10);
                 if (Gravador.listaMoedas.get(9).equals("1")) {
                     startActivity(new Intent(MenuQuestoes.this, Desafio10.class));
                     overridePendingTransition(R.anim.goup, R.anim.godown);
@@ -302,6 +307,13 @@ public  class MenuQuestoes extends AppCompatActivity {
                 quantQuestoesAcertadas.setImageDrawable(ContextCompat.getDrawable(this,R.drawable.dezdez));
                 break;
         }
+    }
+
+    public void animacaoBotao(ImageView imageView){
+        animation = new AlphaAnimation(1, 0); // Altera alpha de visível a invisível
+        animation.setDuration(200);
+        animation.setInterpolator(new LinearInterpolator());
+        imageView.startAnimation(animation);
     }
 
 }

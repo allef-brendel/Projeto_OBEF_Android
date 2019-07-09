@@ -10,6 +10,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
 
@@ -42,9 +44,9 @@ public class Menu extends AppCompatActivity {
     private Button botaoInformacao;
     private Button botaoDeslogar;
     private Gravador gravador;
-    private ProgressDialog pdia;
-
+    private AlphaAnimation animation;
     private FirebaseAuth autenticacao;
+
     @Override
     public void onBackPressed(){
 
@@ -53,18 +55,7 @@ public class Menu extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         gravador=new Gravador();
         super.onCreate(savedInstanceState);
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        int height = displayMetrics.heightPixels;
-        int width = displayMetrics.widthPixels;
-        System.out.println("DPI  "+displayMetrics.densityDpi);
-     //   if(width==1080 && height==1920){
-       //     setContentView(R.layout.layout_1920_menu);
-       // }else{
-            setContentView(R.layout.activity_tela_menu);
-       // }
-
-
+        setContentView(R.layout.activity_tela_menu);
 
         autenticacao = ConfiguracaoFirebase.getFireBaseAutenticacao();
 
@@ -77,6 +68,7 @@ public class Menu extends AppCompatActivity {
         botaoJogar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                animacaoBotao(botaoJogar);
                 startActivity(new Intent(Menu.this, MainActivity.class));
                 overridePendingTransition(R.anim.goup, R.anim.godown);
                 finish();
@@ -86,6 +78,7 @@ public class Menu extends AppCompatActivity {
         botaoPontos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                animacaoBotao(botaoPontos);
                 startActivity(new Intent(Menu.this, MenuPontos.class));
                 overridePendingTransition(R.anim.goup, R.anim.godown);
                 finish();
@@ -95,6 +88,7 @@ public class Menu extends AppCompatActivity {
         botaoDesafio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                animacaoBotao(botaoDesafio);
                 startActivity(new Intent(Menu.this, MenuQuestoes.class));
                 overridePendingTransition(R.anim.goup, R.anim.godown);
                 finish();
@@ -104,6 +98,7 @@ public class Menu extends AppCompatActivity {
         botaoInformacao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                animacaoBotao(botaoInformacao);
                 startActivity(new Intent(Menu.this, MenuInformacao.class));
                 overridePendingTransition(R.anim.goup, R.anim.godown);
                 finish();
@@ -127,27 +122,28 @@ public class Menu extends AppCompatActivity {
                 alertDialogBuilder.setNegativeButton("Não", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
                     }
                 });
-
                 AlertDialog alertDialog = alertDialogBuilder.create();
                 alertDialog.show();
-
             }
         });
-
     }
 
     public void deslogarUsuario(){
         autenticacao.signOut();
         gravador.gravarArquivo("LastUser.txt","1");
-        System.out.println("123123  "+gravador.lerArquivo("LastUser.txt"));
         Intent intent = new Intent(Menu.this,ActivityLogin.class);
         startActivity(intent);
         overridePendingTransition(R.anim.goup, R.anim.godown);
         finish();
     }
 
+    public void animacaoBotao(Button button){
+        animation = new AlphaAnimation(1, 0); // Altera alpha de visível a invisível
+        animation.setDuration(1);
+        animation.setInterpolator(new LinearInterpolator());
+        button.startAnimation(animation);
+    }
 
 }

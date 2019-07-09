@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
 import com.example.obef.Activity.ActivityLogin;
@@ -12,6 +14,7 @@ import com.example.obef.R;
 
 public class Splash2 extends AppCompatActivity {
 
+    private AlphaAnimation animation;
     private Button botaoPlay;
     @Override
     public void onBackPressed(){
@@ -37,10 +40,19 @@ public class Splash2 extends AppCompatActivity {
         botaoPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                animacaoBotao(botaoPlay);
                 startActivity(new Intent(Splash2.this, ActivityLogin.class));
                 overridePendingTransition(R.anim.goup, R.anim.goup);
                 finish();
             }
         });
     }
+
+    public void animacaoBotao(Button button){
+        animation = new AlphaAnimation(1, 0); // Altera alpha de visível a invisível
+        animation.setDuration(200);
+        animation.setInterpolator(new LinearInterpolator());
+        button.startAnimation(animation);
+    }
+
 }

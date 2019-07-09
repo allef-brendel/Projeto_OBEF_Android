@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.LinearInterpolator;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -42,6 +44,7 @@ public class CadastroActivity extends AppCompatActivity {
     private Aluno aluno;
     private FirebaseAuth autenticacao;
     private Spinner combobox;
+    private AlphaAnimation animation;
 
     @Override
     public void onBackPressed(){
@@ -53,18 +56,7 @@ public class CadastroActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        int height = displayMetrics.heightPixels;
-        int width = displayMetrics.widthPixels;
-
-      //  if(width==1080 && height==1920){
-          //  setContentView(R.layout.layout_1920_cadastro);
-     //   }else{
-            setContentView(R.layout.activity_tela_cadastro);
-       // }
-
+        setContentView(R.layout.activity_tela_cadastro);
 
         cadastroEmail = findViewById(R.id.editeText_cadastro_email);
         cadastroNome = findViewById(R.id.editeText_cadastro_nome);
@@ -81,7 +73,7 @@ public class CadastroActivity extends AppCompatActivity {
         botaoCadastra.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                animacaoBotao(botaoCadastra);
                 aluno = new Aluno();
                 aluno.setEmail(cadastroEmail.getText().toString().toLowerCase());
                 aluno.setSenha(cadastroSenha.getText().toString());
@@ -101,6 +93,7 @@ public class CadastroActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
+                    botaoCadastra.setEnabled(false);
 
                     Toast.makeText(CadastroActivity.this, "Conta cadastrada com sucesso!", Toast.LENGTH_SHORT).show();
                     FirebaseUser firebaseUser = task.getResult().getUser();
@@ -115,21 +108,19 @@ public class CadastroActivity extends AppCompatActivity {
                     abrirLoginUsuario();
                     finish();
                 }else{
-                    String erroExecao = "";
-
+                    botaoCadastra.setEnabled(true);
                     try {
                         throw task.getException();
                     }catch (FirebaseAuthWeakPasswordException e){
-                        erroExecao = "Erro ao cadastrar. Digite uma senha com no minimo 6 caracteres, contendo letras e números";
+                        cadastroSenha.setError("Digite uma senha com no minimo 6 caracteres");
                     } catch (FirebaseAuthInvalidCredentialsException e) {
-                        erroExecao = "O e-mail digitado é invalido, digite um novo e-mail";
+                        cadastroEmail.setError("O e-mail digitado é invalido, digite um novo e-mail");
                     } catch (FirebaseAuthUserCollisionException e) {
-                        erroExecao = "Já existe uma conta criada com esse e-mail";
+                        cadastroEmail.setError("Já existe uma conta criada com esse e-mail");
                     } catch (Exception e) {
-                        erroExecao = "Erro ao efetuar cadastro";
+                        Toast.makeText(CadastroActivity.this, "Erro ao efetuar cadastro. Verifique sua conexão com a internet", Toast.LENGTH_SHORT).show();
                         e.printStackTrace();
                     }
-                    Toast.makeText(CadastroActivity.this, erroExecao, Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -142,4 +133,12 @@ public class CadastroActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.goup, R.anim.godown);
         finish();
     }
+
+    public void animacaoBotao(Button button){
+        animation = new AlphaAnimation(1, 0); // Altera alpha de visível a invisível
+        animation.setDuration(200);
+        animation.setInterpolator(new LinearInterpolator());
+        button.startAnimation(animation);
+    }
+
 }

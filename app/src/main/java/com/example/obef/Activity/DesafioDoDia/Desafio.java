@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.Window;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -49,6 +51,7 @@ public abstract class Desafio extends AppCompatActivity {
     Questao questao;
     private FirebaseAuth auth;
     private Dialog MyDialog;
+    private AlphaAnimation animation;
 
     @Override
     public void onBackPressed(){
@@ -96,11 +99,10 @@ public abstract class Desafio extends AppCompatActivity {
         buttonEscolher.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                        animacaoBotao(buttonEscolher);
                         int idRadioButtonEscolhido = radioGroup.getCheckedRadioButtonId() - radioButton1.getId()+1;
                         Integer i = new Integer(idRadioButtonEscolhido);
                         Boolean escolhida = questao.obterStatus(i);
-                        System.out.println(">>>"+radioGroup.getCheckedRadioButtonId()+">>>"+escolhida);
                 if(escolhida == null  || radioGroup.getCheckedRadioButtonId()==-1){
                     Toast.makeText(Desafio.this,"Escolha uma alternativa", Toast.LENGTH_LONG).show();
                 }
@@ -112,7 +114,6 @@ public abstract class Desafio extends AppCompatActivity {
                             statusGameOver(i);
                             gameOver();
                         }
-
             }
         });
     }
@@ -121,13 +122,13 @@ public abstract class Desafio extends AppCompatActivity {
         buttonDica.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                animacaoBotao(buttonDica);
                         dicaUsada();
                         String string2 = questao.getDica();
                         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(desafio);
                         alertDialogBuilder.setMessage(string2);
                         AlertDialog alertDialog = alertDialogBuilder.create();
                         alertDialog.show();
-
             }
         });
     }
@@ -238,11 +239,13 @@ public abstract class Desafio extends AppCompatActivity {
         this.usouDica=true;
         pontosGanhos=80;
     }
+
+    public void animacaoBotao(Button button){
+        animation = new AlphaAnimation(1, 0); // Altera alpha de visível a invisível
+        animation.setDuration(200);
+        animation.setInterpolator(new LinearInterpolator());
+        button.startAnimation(animation);
+    }
+
     public abstract int gerarID();
-
-
-
-
-
-
 }

@@ -1,16 +1,15 @@
 package com.example.obef.Activity;
 
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.Window;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.LinearInterpolator;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
@@ -47,6 +46,7 @@ public class ActivityLogin extends AppCompatActivity implements TextView.OnEdito
     private FirebaseAuth autenticacao;
     private Gravador gravador;
     private ProgressDialog pdia;
+    private AlphaAnimation animation;
     boolean online;
 
 
@@ -99,13 +99,14 @@ public class ActivityLogin extends AppCompatActivity implements TextView.OnEdito
         botaoLogar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                botoesInvisiveis();
+                animecaoBotao(botaoLogar);
+               // botoesInvisiveis();
                 aluno = new Aluno();
                 aluno.setEmail(email.getText().toString().toLowerCase());
                 aluno.setSenha(senha.getText().toString());
                 if (email.getText().toString().toLowerCase().equals("")|| senha.getText().toString().equals("")) {
                     Toast.makeText(ActivityLogin.this, "Digite e-mail e senha", Toast.LENGTH_LONG).show();
-                    botoesVisiveis();
+                    //botoesVisiveis();
                 } else validarLogin();
             }
         });
@@ -113,7 +114,9 @@ public class ActivityLogin extends AppCompatActivity implements TextView.OnEdito
         botaoCadastrese.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                botoesInvisiveis();
+                botaoCadastrese.setEnabled(false);
+                animecaoBotao(botaoCadastrese);
+                //botoesInvisiveis();
                 startActivity(new Intent(ActivityLogin.this,CadastroActivity.class));
                 overridePendingTransition(R.anim.goup, R.anim.godown);
                 finish();
@@ -128,6 +131,7 @@ public class ActivityLogin extends AppCompatActivity implements TextView.OnEdito
     }
 
     private void validarLogin() {
+            botaoLogar.setEnabled(false);
             autenticacao = ConfiguracaoFirebase.getFireBaseAutenticacao();
             autenticacao.signInWithEmailAndPassword(aluno.getEmail(), aluno.getSenha()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
@@ -137,17 +141,16 @@ public class ActivityLogin extends AppCompatActivity implements TextView.OnEdito
                         loginValidado();
 
                     } else {
+                        botaoLogar.setEnabled(true);
                         loginNaoValidado(task);
                     }
                 }
             });
         }
     public boolean validouUserOffline(){
-        System.out.println("asdasd  " +gravador.lerArquivo("LastUser.txt"));
         if(gravador.lerArquivo("LastUser.txt").length()>0 &&Integer.parseInt(gravador.lerArquivo("LastUser.txt").substring(0,1))==1){
             return false;
         }
-        System.out.println("asdasd  " +gravador.lerArquivo("LastUser.txt"));
         if(gravador.lerArquivo("User.txt").length()>1){
             return true;
         }else{
@@ -227,8 +230,6 @@ public class ActivityLogin extends AppCompatActivity implements TextView.OnEdito
     }
 
     private void loginNaoValidado(@NonNull Task<AuthResult> task){
-        String erroExecao = "";
-
         try {
             throw task.getException();
         } catch (FirebaseAuthInvalidUserException e) {
@@ -239,8 +240,8 @@ public class ActivityLogin extends AppCompatActivity implements TextView.OnEdito
             Toast.makeText(ActivityLogin.this, "Erro ao efetuar o login. Verifique sua conexão com a internet.", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
-        botaoLogar.setVisibility(View.VISIBLE);
-        botaoCadastrese.setVisibility(View.VISIBLE);
+       // botaoLogar.setVisibility(View.VISIBLE);
+       // botaoCadastrese.setVisibility(View.VISIBLE);
 
     }
     private void bloqueioDesafioSeSegundoLogin(){
@@ -254,15 +255,24 @@ public class ActivityLogin extends AppCompatActivity implements TextView.OnEdito
     @Override
     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
         if (EditorInfo.IME_ACTION_DONE == actionId) {
-            botoesInvisiveis();
+          //  botoesInvisiveis();
             aluno = new Aluno();
             aluno.setEmail(email.getText().toString().toLowerCase());
             aluno.setSenha(senha.getText().toString());
             if (email.getText().toString().toLowerCase().equals("") || senha.getText().toString().equals("")) {
                 Toast.makeText(ActivityLogin.this, "Digite e-mail e senha", Toast.LENGTH_LONG).show();
-                botoesVisiveis();
+                botaoLogar.setEnabled(true);
+             //   botoesVisiveis();
             } else validarLogin();
         }
         return false;
     }
+
+    public void animecaoBotao(Button button){
+        animation = new AlphaAnimation(1, 0); // Altera alpha de visível a invisível
+        animation.setDuration(200);
+        animation.setInterpolator(new LinearInterpolator());
+        button.startAnimation(animation);
+    }
+
 }
