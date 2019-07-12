@@ -105,7 +105,7 @@ public class ActivityLogin extends AppCompatActivity implements TextView.OnEdito
                 aluno.setEmail(email.getText().toString().toLowerCase());
                 aluno.setSenha(senha.getText().toString());
                 if (email.getText().toString().toLowerCase().equals("")|| senha.getText().toString().equals("")) {
-                    Toast.makeText(ActivityLogin.this, "Digite e-mail e senha", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ActivityLogin.this, "Digite e-mail e senha", Toast.LENGTH_SHORT).show();
                     //botoesVisiveis();
                 } else validarLogin();
             }
@@ -260,7 +260,7 @@ public class ActivityLogin extends AppCompatActivity implements TextView.OnEdito
             aluno.setEmail(email.getText().toString().toLowerCase());
             aluno.setSenha(senha.getText().toString());
             if (email.getText().toString().toLowerCase().equals("") || senha.getText().toString().equals("")) {
-                Toast.makeText(ActivityLogin.this, "Digite e-mail e senha", Toast.LENGTH_LONG).show();
+                Toast.makeText(ActivityLogin.this, "Digite e-mail e senha", Toast.LENGTH_SHORT).show();
                 botaoLogar.setEnabled(true);
              //   botoesVisiveis();
             } else validarLogin();

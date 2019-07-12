@@ -108,6 +108,7 @@ public class Menu extends AppCompatActivity {
         botaoDeslogar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                animacaoBotao(botaoDeslogar);
                 final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(Menu.this);
                 alertDialogBuilder.setMessage("Deslogar Usuário?");
                 alertDialogBuilder.setCancelable(false);
