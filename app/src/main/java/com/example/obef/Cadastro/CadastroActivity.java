@@ -74,12 +74,15 @@ public class CadastroActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 animacaoBotao(botaoCadastra);
+
                 aluno = new Aluno();
                 aluno.setEmail(cadastroEmail.getText().toString().toLowerCase());
                 aluno.setSenha(cadastroSenha.getText().toString());
                 aluno.setNome(cadastroNome.getText().toString());
+                aluno.setSerie(""+combobox.getSelectedItemPosition());
                 if(cadastroEmail.getText().toString().toLowerCase().equals("") ||
-                        cadastroSenha.getText().toString().equals("") || cadastroNome.getText().toString().equals("")){
+                        cadastroSenha.getText().toString().equals("") || cadastroNome.getText().toString().equals("")
+                        || combobox.getSelectedItemPosition()==0){
                     Toast.makeText(CadastroActivity.this,"Você não informou todos os dados", Toast.LENGTH_SHORT).show();
                 }else cadastrarUsuario();
             }

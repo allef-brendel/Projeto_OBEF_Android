@@ -148,12 +148,13 @@ public class RecuperarQuestao extends AppCompatActivity {
         int pontosBD =dataSnapshot.child("Acertos").child(Base64Custom.codificarBase64(gravador.lerUser())).child("pontos").getValue(Integer.class);
         int pontosApp=gravador.lerAtualizacaoPontos();
         int resultado=pontosApp+pontosBD;
+        String nivel= dataSnapshot.child("Alunos").child(Base64Custom.codificarBase64(gravador.lerUser())).child("serie").getValue(String.class);
         gravador.resetarAtualizacaoPontos();
         firebase.child("Acertos").child(Base64Custom.codificarBase64(gravador.lerUser())).child("pontos").setValue(resultado);
         //gravador.salvarPontosGanhosTotal(resultado);
-        int quant=dataSnapshot.child("quantQuestoes").getValue(Integer.class);
+        int quant=dataSnapshot.child("contQuestoesN"+nivel).getValue(Integer.class);
         Random random = new Random();
-        int[] idQuestões = new int[quant];
+        int[] idQuestoes = new int[quant];
         int[] indiceRandom = new int[10];
         int x = 0;
         while (x < indiceRandom.length) {
@@ -172,23 +173,23 @@ public class RecuperarQuestao extends AppCompatActivity {
         }
 
         int cont = 0;
-        for (DataSnapshot d : dataSnapshot.child("idQuestao").getChildren()) {
+        for (DataSnapshot d : dataSnapshot.child("idquestaoN"+nivel).getChildren()) {
 
-            idQuestões[cont] = d.getValue(Integer.class);
+            idQuestoes[cont] = d.getValue(Integer.class);
             System.out.println(d.getValue(Integer.class).toString());
             cont++;
         }
 
-        Questao q1 = dataSnapshot.child("Questoes").child("" + idQuestões[indiceRandom[0]]).getValue(Questao.class);
-        Questao q2 = dataSnapshot.child("Questoes").child("" + idQuestões[indiceRandom[1]]).getValue(Questao.class);
-        Questao q3 = dataSnapshot.child("Questoes").child("" + idQuestões[indiceRandom[2]]).getValue(Questao.class);
-        Questao q4 = dataSnapshot.child("Questoes").child("" + idQuestões[indiceRandom[3]]).getValue(Questao.class);
-        Questao q5 = dataSnapshot.child("Questoes").child("" + idQuestões[indiceRandom[4]]).getValue(Questao.class);
-        Questao q6 = dataSnapshot.child("Questoes").child("" + idQuestões[indiceRandom[5]]).getValue(Questao.class);
-        Questao q7 = dataSnapshot.child("Questoes").child("" + idQuestões[indiceRandom[6]]).getValue(Questao.class);
-        Questao q8 = dataSnapshot.child("Questoes").child("" + idQuestões[indiceRandom[7]]).getValue(Questao.class);
-        Questao q9 = dataSnapshot.child("Questoes").child("" + idQuestões[indiceRandom[8]]).getValue(Questao.class);
-        Questao q10 = dataSnapshot.child("Questoes").child("" + idQuestões[indiceRandom[9]]).getValue(Questao.class);
+        Questao q1 = getQuestaoBD(firebase, dataSnapshot, idQuestoes[indiceRandom[0]], nivel);
+        Questao q2 = getQuestaoBD(firebase, dataSnapshot, idQuestoes[indiceRandom[1]], nivel);
+        Questao q3 = getQuestaoBD(firebase, dataSnapshot, idQuestoes[indiceRandom[2]], nivel);
+        Questao q4 = getQuestaoBD(firebase, dataSnapshot, idQuestoes[indiceRandom[3]], nivel);
+        Questao q5 = getQuestaoBD(firebase, dataSnapshot, idQuestoes[indiceRandom[4]], nivel);
+        Questao q6 = getQuestaoBD(firebase, dataSnapshot, idQuestoes[indiceRandom[5]], nivel);
+        Questao q7 = getQuestaoBD(firebase, dataSnapshot, idQuestoes[indiceRandom[6]], nivel);
+        Questao q8 = getQuestaoBD(firebase, dataSnapshot, idQuestoes[indiceRandom[7]], nivel);
+        Questao q9 = getQuestaoBD(firebase, dataSnapshot, idQuestoes[indiceRandom[8]], nivel);
+        Questao q10 = getQuestaoBD(firebase, dataSnapshot, idQuestoes[indiceRandom[9]], nivel);
         gravador.salvarQuestao("Questao1.txt", q1);
         gravador.salvarQuestao("Questao2.txt", q2);
         gravador.salvarQuestao("Questao3.txt", q3);
@@ -208,4 +209,10 @@ public class RecuperarQuestao extends AppCompatActivity {
         gravador.bloquearDesafio();
         abriTelaPrincipal();
     }
+    private Questao getQuestaoBD(DatabaseReference firebase,DataSnapshot dataSnapshot,int idRandom,String nivel){
+        Questao q=dataSnapshot.child("questoes").child(nivel).child("" + idRandom).getValue(Questao.class);
+        System.out.println(q.getDica());
+        return q;
+    }
+
 }
